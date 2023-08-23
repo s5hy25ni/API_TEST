@@ -14,6 +14,7 @@
 	<select id="getList" resultType="boardVo">
 		SELECT SEQ, CONTENT
 			FROM CK_BOARD cb
+			ORDER BY SEQ
 	</select>
 	
 	<select id="getDetail" resultType="java.lang.String">
