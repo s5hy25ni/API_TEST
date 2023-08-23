@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>글 상세보기</title>
 <link rel="stylesheet" href="./css/index.css">
-<link rel="stylesheet" href="./css/detail.css">
+<link rel="stylesheet" href="./css/ck-content.css">
 </head>
 <body>
 	<div id="container">
