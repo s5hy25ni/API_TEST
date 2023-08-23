@@ -29,7 +29,6 @@ import {
 import { Indent, IndentBlock } from '@ckeditor/ckeditor5-indent';
 import { AutoLink, Link, LinkImage } from '@ckeditor/ckeditor5-link';
 import { DocumentList, DocumentListProperties } from '@ckeditor/ckeditor5-list';
-import { Markdown } from '@ckeditor/ckeditor5-markdown-gfm';
 import { Paragraph } from '@ckeditor/ckeditor5-paragraph';
 import { PasteFromOffice } from '@ckeditor/ckeditor5-paste-from-office';
 import { SelectAll } from '@ckeditor/ckeditor5-select-all';
@@ -42,7 +41,7 @@ import {
 	TableToolbar
 } from '@ckeditor/ckeditor5-table';
 import { TextTransformation } from '@ckeditor/ckeditor5-typing';
-import { Base64UploadAdapter } from '@ckeditor/ckeditor5-upload';
+import { SimpleUploadAdapter } from '@ckeditor/ckeditor5-upload';
 import { WordCount } from '@ckeditor/ckeditor5-word-count';
 
 // You can read more about extending the build with additional plugins in the "Installing plugins" guide.
@@ -55,7 +54,6 @@ class Editor extends ClassicEditor {
 		AutoLink,
 		Autoformat,
 		Autosave,
-		Base64UploadAdapter,
 		BlockQuote,
 		Bold,
 		Code,
@@ -80,10 +78,10 @@ class Editor extends ClassicEditor {
 		Italic,
 		Link,
 		LinkImage,
-		Markdown,
 		Paragraph,
 		PasteFromOffice,
 		SelectAll,
+		SimpleUploadAdapter,
 		Strikethrough,
 		Table,
 		TableCaption,

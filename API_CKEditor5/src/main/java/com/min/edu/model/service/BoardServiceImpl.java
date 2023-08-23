@@ -21,14 +21,20 @@ public class BoardServiceImpl implements IBoardService {
 	@Override
 	public int insertBoard(String content) {
 		logger.info("@@@@@@@@@@Service BoardServiceImpl insertBoard {}", content);
-		dao.insertBoard(content);
-		
-		return 1;
+		int n =dao.insertBoard(content);
+		int m = dao.getMaxSeq();
+		return (n>0)?m:0;
 	}
 	
 	@Override
-	public List<BoardVo> selectList() {
-		logger.info("@@@@@@@@@@Service BoardServiceImpl selectList");
-		return dao.selectList();
+	public List<BoardVo> getList() {
+		logger.info("@@@@@@@@@@Service BoardServiceImpl getList");
+		return dao.getList();
+	}
+	
+	@Override
+	public String getDetail(String seq) {
+		logger.info("@@@@@@@@@@Service BoardServiceImpl getDetail : {}", seq);
+		return dao.getDetail(seq);
 	}
 }
