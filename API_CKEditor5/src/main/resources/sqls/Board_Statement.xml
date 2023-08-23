@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.min.edu.model.mapper.BoardDaoImpl">
+
+	<insert id="insertBoard">
+		INSERT INTO HR.CK_BOARD(SEQ, CONTENT)
+				VALUES((SELECT NVL(MAX(SEQ),0)+1 FROM CK_BOARD), #{content})
+	</insert>
+	
+	<select id="getMaxSeq">
+		SELECT NVL(MAX(SEQ),0)+1 FROM CK_BOARD
+	</select>
+	
+	<select id="selectList" resultType="boardVo">
+		SELECT SEQ, CONTENT
+			FROM CK_BOARD cb
+	</select>
+</mapper>
