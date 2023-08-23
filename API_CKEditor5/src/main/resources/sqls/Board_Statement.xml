@@ -7,12 +7,18 @@
 				VALUES((SELECT NVL(MAX(SEQ),0)+1 FROM CK_BOARD), #{content})
 	</insert>
 	
-	<select id="getMaxSeq">
-		SELECT NVL(MAX(SEQ),0)+1 FROM CK_BOARD
+	<select id="getMaxSeq" resultType="java.lang.Integer">
+		SELECT NVL(MAX(SEQ),0) FROM CK_BOARD
 	</select>
 	
-	<select id="selectList" resultType="boardVo">
+	<select id="getList" resultType="boardVo">
 		SELECT SEQ, CONTENT
 			FROM CK_BOARD cb
+	</select>
+	
+	<select id="getDetail" resultType="java.lang.String">
+		SELECT CONTENT
+			FROM CK_BOARD
+			WHERE SEQ=#{seq}
 	</select>
 </mapper>

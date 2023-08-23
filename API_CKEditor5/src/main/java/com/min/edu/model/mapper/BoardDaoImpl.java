@@ -20,19 +20,25 @@ public class BoardDaoImpl implements IBoardDao {
 	
 	@Override
 	public int insertBoard(String content) {
-		logger.info("@@@@@@@@@@Repository BoardDaoImpl insertBoard {}", content);
+		logger.info("@@@@@@@@@@Repository BoardDaoImpl insertBoard : {}", content);
 		return session.insert("com.min.edu.model.mapper.BoardDaoImpl.insertBoard",content);
 	}
 	
 	@Override
 	public int getMaxSeq() {		
 		logger.info("@@@@@@@@@@Repository BoardDaoImpl getMaxSeq");
-		return 0;
+		return session.selectOne("com.min.edu.model.mapper.BoardDaoImpl.getMaxSeq");
 	}
 	
 	@Override
-	public List<BoardVo> selectList() {
-		logger.info("@@@@@@@@@@Repository BoardDaoImpl selectList");
-		return session.selectList("com.min.edu.model.mapper.BoardDaoImpl.selectList");
+	public List<BoardVo> getList() {
+		logger.info("@@@@@@@@@@Repository BoardDaoImpl getList");
+		return session.selectList("com.min.edu.model.mapper.BoardDaoImpl.getList");
+	}
+	
+	@Override
+	public String getDetail(String seq) {
+		logger.info("@@@@@@@@@@Repository BoardDaoImpl getDetail : {}", seq);
+		return session.selectOne("com.min.edu.model.mapper.BoardDaoImpl.getDetail", seq);
 	}
 }

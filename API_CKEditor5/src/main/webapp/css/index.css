@@ -1,34 +1,52 @@
 @charset "UTF-8";
 
 #container{
-	width: 800px;
+	width: 1000px;
 	margin: 50px auto;
+}
+
+#container>h1, #container>h3{
+	color: pink;
+	margin: 0px;
+}
+
+#container>h1{
 	text-align: center;
 }
 
-#header{
-	width: 800px;
-	height: 100px;
+#container>h3{
+	text-align: right;
 }
 
-#header div{
-	float: left;
+.btn {
+	float: right;
+	width: 100px;
+	padding-right: 0px;
 }
 
-#title {
-	width: 70%;
-}
-
-#btn{	
-	width: 10%;
-	padding: 0px;
-}
-
-#btn input{
+.btn input {
 	width: 100%;
-	height: 40px;
+	padding: 0px;
+	background-color: pink;
+	border: 1px solid grey;
 }
 
-#btn input:hover {
+.btn input:hover {
 	cursor: pointer;
+}
+
+ul{
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+	color: gray;
+	border-bottom: 1px solid gray;
+}
+
+#list{
+	width: 200px;
+	margin: 0 auto;
+	text-align: left;
 }

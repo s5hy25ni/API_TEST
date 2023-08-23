@@ -36,7 +36,7 @@ public class JUnitTest {
 //		int n = service.insertBoard("test content");
 //		assertEquals(1, n);
 		
-		List<BoardVo> list = service.selectList();
+		List<BoardVo> list = service.getList();
 		assertNotNull(list);
 	}
 

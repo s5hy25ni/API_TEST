@@ -7,5 +7,6 @@ import com.min.edu.vo.BoardVo;
 public interface IBoardDao{
 	public int insertBoard(String content);
 	public int getMaxSeq();
-	public List<BoardVo> selectList();
+	public List<BoardVo> getList();
+	public String getDetail(String seq);
 }

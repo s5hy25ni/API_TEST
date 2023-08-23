@@ -1,10 +1,8 @@
 package com.min.edu;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
+import org.apache.commons.text.StringEscapeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,23 +23,30 @@ public class HomeController {
 	private IBoardService service;
 
 	@RequestMapping(value = "/write.do", method = RequestMethod.POST)
-	public String home(String content, Model model) {
-		logger.info(">>>>>>>>>>>>>>>>>>>>>>> HomeController @RequestMapping.POST home : {}",content);
-		service.insertBoard(content);
-		return "detail";
+	public String write(String content, Model model) {
+		logger.info(">>>>>>>>>>>>>>>>>>>>>>> @RequestMapping.POST write : {}",content);
+		String escapedContent = StringEscapeUtils.escapeHtml4(content);
+		logger.info(">>>>>>>>>>>>>>>>>>>>>>> @RequestMapping.POST write escapedContent : {}",escapedContent);
+		int n = service.insertBoard(escapedContent);
+		
+		return (n==0)?"list":"redirect:/detail.do?seq="+n;
 	}
 	
 	@RequestMapping(value="/boardList.do", method = RequestMethod.GET)
 	public String boardList(Model model) {
-		logger.info(">>>>>>>>>>>>>>>>>>>>>>> HomeController @RequestMapping.GET boardList");
-		List<BoardVo> list = service.selectList();
+		logger.info(">>>>>>>>>>>>>>>>>>>>>>> @RequestMapping.GET boardList");
+		List<BoardVo> list = service.getList();
 		model.addAttribute("list", list);
 		return "list";
 	}
 	
 	@RequestMapping(value="/detail.do", method = RequestMethod.GET)
-	public String detail(String seq) {
-		logger.info(">>>>>>>>>>>>>>>>>>>>>>> HomeController @RequestMapping.GET detail : {}",seq);
+	public String detail(String seq, Model model) {
+		logger.info(">>>>>>>>>>>>>>>>>>>>>>> @RequestMapping.GET detail : {}",seq);
+		String content = service.getDetail(seq);
+		logger.info(">>>>>>>>>>>>>>>>>>>>>>> @RequestMapping.GET detail service.getDetail : {}", content);
+		String unescapedContent = StringEscapeUtils.unescapeHtml4(content);
+		model.addAttribute("content",unescapedContent);
 		return "detail";
 	}
 	
