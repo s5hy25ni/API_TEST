@@ -13,7 +13,7 @@
 	<div id="container">
 		<h1>CKEditor5 API Sample</h1>
 		<h3>made by tadak</h3>
-		<form action="./write.do" method="post">
+		<form action="./write.do" method="post" >
 			<textarea id="editor" name="content"></textarea>
 		</form>
 		<div class="btn"><input type="button" onclick="writeBoard()" value="글쓰기"></div>

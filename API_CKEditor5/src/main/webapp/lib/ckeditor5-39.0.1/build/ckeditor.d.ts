@@ -23,10 +23,10 @@ import { PasteFromOffice } from '@ckeditor/ckeditor5-paste-from-office';
 import { SelectAll } from '@ckeditor/ckeditor5-select-all';
 import { Table, TableCaption, TableCellProperties, TableColumnResize, TableProperties, TableToolbar } from '@ckeditor/ckeditor5-table';
 import { TextTransformation } from '@ckeditor/ckeditor5-typing';
-import { SimpleUploadAdapter } from '@ckeditor/ckeditor5-upload';
+import { Base64UploadAdapter } from '@ckeditor/ckeditor5-upload';
 import { WordCount } from '@ckeditor/ckeditor5-word-count';
 declare class Editor extends ClassicEditor {
-    static builtinPlugins: (typeof Alignment | typeof AutoImage | typeof AutoLink | typeof Autoformat | typeof Autosave | typeof BlockQuote | typeof Bold | typeof Code | typeof CodeBlock | typeof DocumentList | typeof DocumentListProperties | typeof Essentials | typeof FindAndReplace | typeof FontBackgroundColor | typeof FontColor | typeof Heading | typeof HorizontalLine | typeof Image | typeof ImageCaption | typeof ImageInsert | typeof ImageResize | typeof ImageStyle | typeof ImageToolbar | typeof ImageUpload | typeof Indent | typeof IndentBlock | typeof Italic | typeof Link | typeof LinkImage | typeof Paragraph | typeof PasteFromOffice | typeof SelectAll | typeof SimpleUploadAdapter | typeof Strikethrough | typeof Table | typeof TableCaption | typeof TableCellProperties | typeof TableColumnResize | typeof TableProperties | typeof TableToolbar | typeof TextTransformation | typeof Underline | typeof WordCount)[];
+    static builtinPlugins: (typeof Alignment | typeof AutoImage | typeof AutoLink | typeof Autoformat | typeof Autosave | typeof BlockQuote | typeof Bold | typeof Code | typeof CodeBlock | typeof DocumentList | typeof DocumentListProperties | typeof Essentials | typeof FindAndReplace | typeof FontBackgroundColor | typeof FontColor | typeof Heading | typeof HorizontalLine | typeof Image | typeof ImageCaption | typeof ImageInsert | typeof ImageResize | typeof ImageStyle | typeof ImageToolbar | typeof ImageUpload | typeof Indent | typeof IndentBlock | typeof Italic | typeof Link | typeof LinkImage | typeof Paragraph | typeof PasteFromOffice | typeof SelectAll | typeof Base64UploadAdapter | typeof Strikethrough | typeof Table | typeof TableCaption | typeof TableCellProperties | typeof TableColumnResize | typeof TableProperties | typeof TableToolbar | typeof TextTransformation | typeof Underline | typeof WordCount)[];
     static defaultConfig: {
         toolbar: {
             items: string[];
