@@ -22,8 +22,8 @@ public class BoardServiceImpl implements IBoardService {
 	public int insertBoard(String content) {
 		logger.info("@@@@@@@@@@Service BoardServiceImpl insertBoard {}", content);
 		int n =dao.insertBoard(content);
-		int m = dao.getMaxSeq();
-		return (n>0)?m:0;
+		int m = (n>0)?dao.getMaxSeq():0;
+		return m;
 	}
 	
 	@Override

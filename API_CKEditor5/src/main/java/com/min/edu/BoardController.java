@@ -1,7 +1,17 @@
 package com.min.edu;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.text.StringEscapeUtils;
 import org.slf4j.Logger;
@@ -13,14 +23,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.util.WebUtils;
 
 import com.min.edu.model.service.IBoardService;
 import com.min.edu.vo.BoardVo;
 
 @Controller
-public class HomeController {
-	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+public class BoardController {
+private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 	@Autowired
 	private IBoardService service;
@@ -78,14 +88,82 @@ public class HomeController {
 		return "redirect:/detail.do?seq="+vo.getSeq();
 	}
 	
-	@RequestMapping(value="/uploadfile.do", method = RequestMethod.POST)
+	@RequestMapping(value="/uploadImage.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String uploadfile(MultipartFile upload) {
+	public Map<String, String> uploadImage(MultipartFile upload, HttpServletRequest req) {
 		// MultipartFile[field="upload", filename=음식사진.jpg, contentType=image/jpeg, size=3218382]
-		logger.info(">>>>>>>>>>>>>>>>>>>>>>> @RequestMapping.POST uploadfile : {}",upload);
+		logger.info(">>>>>>>>>>>>>>>>>>>>>>> @RequestMapping.POST uploadImage : {}",upload);
 		
+		String ext = upload.getOriginalFilename().substring(upload.getOriginalFilename().lastIndexOf("."));
+		String saveName = UUID.randomUUID().toString().replace("-", "")+ext;
 		
-		return "";
+		InputStream inputStream = null;
+		OutputStream outputStream = null;
+		String path="";
+		
+		try {
+			// 파일읽기
+			inputStream = upload.getInputStream();
+			
+			// 저장 위치 문자열 만들기(상대경로)
+			path = WebUtils.getRealPath(req.getSession().getServletContext(),"/ckupload");
+			System.out.println(path);
+			
+			// 저장 위치가 존재하지 않으면 폴더 생성
+			File storage = new File(path);
+			if(!storage.exists()) {
+				storage.mkdir();
+			}
+			
+			// 저장할 파일이 해당 위치에 없다면 만들어주고 아니면 오버라이드 함
+			File newFile = new File(path+"/"+saveName);
+			if(!newFile.exists()) {
+				newFile.createNewFile();
+			}
+			
+			// client에서 받아온 파일(upload)를 쓸 대상(newFile) 지정
+			outputStream = new FileOutputStream(newFile);
+			
+			// 파일(upload)를 읽어 대상(newFile)에 씀
+			int read = 0;
+			byte[] b = new byte[(int)upload.getSize()];
+			while((read=inputStream.read(b))!=-1) {
+				outputStream.write(b,0,read);
+			}
+			
+		} catch (IOException e) {
+			logger.error("!!!!!!!!!!!!!!!! uploadImage read Error : \n"+e.getMessage());
+		} finally {
+				try {
+					inputStream.close();
+					outputStream.close();
+				} catch (IOException e) {
+					logger.error("!!!!!!!!!!!!!!!! uploadImage close Error : \n"+e.getMessage());
+					e.printStackTrace();
+				}
+		}
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("url", "./ckupload/"+saveName);
+		
+		return map;
 	}
 	
+	@RequestMapping(value="/removeImage.do", method = RequestMethod.POST)
+	@ResponseBody
+	public void removeImage(String saveName, HttpServletRequest req) {
+		logger.info(">>>>>>>>>>>>>>>>>>>>>>> @RequestMapping.POST removeImage : {}", saveName);		
+		
+		String path = "";
+		
+		try {
+			path = WebUtils.getRealPath(req.getSession().getServletContext(),"/ckupload");
+			File oldFile = new File(path+"/"+saveName);
+			if(oldFile.exists()) {
+				oldFile.delete();
+			}
+		} catch (FileNotFoundException e) {
+			logger.error("!!!!!!!!!!!!!!!! removeImage Error : \n"+e.getMessage());
+		}
+	}
 }
