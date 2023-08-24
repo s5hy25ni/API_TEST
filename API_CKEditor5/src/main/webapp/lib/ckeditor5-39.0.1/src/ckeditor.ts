@@ -81,7 +81,7 @@ class Editor extends ClassicEditor {
 		Paragraph,
 		PasteFromOffice,
 		SelectAll,
-		SimpleUploadAdapter,
+		SimpleUploadAdapter ,
 		Strikethrough,
 		Table,
 		TableCaption,

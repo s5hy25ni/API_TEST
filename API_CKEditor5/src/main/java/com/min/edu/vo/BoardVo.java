@@ -14,6 +14,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class BoardVo {
-	public int seq;
-	public String content;
+	private int seq;
+	private String content;
 }

@@ -9,4 +9,5 @@ public interface IBoardDao{
 	public int getMaxSeq();
 	public List<BoardVo> getList();
 	public String getDetail(String seq);
+	public int updateBoard(BoardVo vo);
 }
