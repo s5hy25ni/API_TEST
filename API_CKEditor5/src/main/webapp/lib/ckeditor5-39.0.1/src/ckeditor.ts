@@ -41,7 +41,7 @@ import {
 	TableToolbar
 } from '@ckeditor/ckeditor5-table';
 import { TextTransformation } from '@ckeditor/ckeditor5-typing';
-import { Base64UploadAdapter } from '@ckeditor/ckeditor5-upload';
+import { SimpleUploadAdapter } from '@ckeditor/ckeditor5-upload';
 import { WordCount } from '@ckeditor/ckeditor5-word-count';
 
 // You can read more about extending the build with additional plugins in the "Installing plugins" guide.
@@ -81,7 +81,7 @@ class Editor extends ClassicEditor {
 		Paragraph,
 		PasteFromOffice,
 		SelectAll,
-		Base64UploadAdapter ,
+		SimpleUploadAdapter ,
 		Strikethrough,
 		Table,
 		TableCaption,

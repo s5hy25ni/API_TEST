@@ -1,5 +1,6 @@
 package com.min.edu;
 
+import java.io.File;
 import java.util.List;
 
 import org.apache.commons.text.StringEscapeUtils;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.min.edu.model.service.IBoardService;
 import com.min.edu.vo.BoardVo;
@@ -74,6 +76,16 @@ public class HomeController {
 		logger.info(">>>>>>>>>>>>>>>>>>>>>>> @RequestMapping.POST updateBoard : {}",vo);
 		service.updateBoard(vo);
 		return "redirect:/detail.do?seq="+vo.getSeq();
+	}
+	
+	@RequestMapping(value="/uploadfile.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String uploadfile(MultipartFile upload) {
+		// MultipartFile[field="upload", filename=음식사진.jpg, contentType=image/jpeg, size=3218382]
+		logger.info(">>>>>>>>>>>>>>>>>>>>>>> @RequestMapping.POST uploadfile : {}",upload);
+		
+		
+		return "";
 	}
 	
 }
