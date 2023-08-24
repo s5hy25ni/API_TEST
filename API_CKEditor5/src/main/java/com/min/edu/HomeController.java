@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.min.edu.model.service.IBoardService;
 import com.min.edu.vo.BoardVo;
@@ -47,7 +48,32 @@ public class HomeController {
 		logger.info(">>>>>>>>>>>>>>>>>>>>>>> @RequestMapping.GET detail service.getDetail : {}", content);
 		String unescapedContent = StringEscapeUtils.unescapeHtml4(content);
 		model.addAttribute("content",unescapedContent);
+		model.addAttribute("seq",seq);
 		return "detail";
+	}
+	
+	@RequestMapping(value="/updateForm.do", method = RequestMethod.GET)
+	public String updateForm(String seq, Model model) {
+		logger.info(">>>>>>>>>>>>>>>>>>>>>>> @RequestMapping.GET updateForm : {}",seq);
+		model.addAttribute("seq",seq);		
+		return "updateForm";
+	}
+	
+	@RequestMapping(value="/getContent.do", method = RequestMethod.POST, produces = "text/html; charset=UTF-8")
+	@ResponseBody
+	public String getContent(String seq) {
+		logger.info(">>>>>>>>>>>>>>>>>>>>>>> @RequestMapping.POST getContent : {}",seq);
+		String content = service.getDetail(seq);
+		String unescapedContent = StringEscapeUtils.unescapeHtml4(content);
+		
+		return unescapedContent;
+	}
+	
+	@RequestMapping(value="/updateBoard.do", method = RequestMethod.POST)
+	public String updateBoard(BoardVo vo) {
+		logger.info(">>>>>>>>>>>>>>>>>>>>>>> @RequestMapping.POST updateBoard : {}",vo);
+		service.updateBoard(vo);
+		return "redirect:/detail.do?seq="+vo.getSeq();
 	}
 	
 }

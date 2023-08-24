@@ -8,4 +8,5 @@ public interface IBoardService {
 	public int insertBoard(String content);
 	public List<BoardVo> getList();
 	public String getDetail(String seq);
+	public int updateBoard(BoardVo vo);
 }

@@ -11,9 +11,10 @@
 <body>
 	<div id="container">
 		<h1>글 상세보기</h1>
+		<div class="btn"><input type="button" onclick="location.href='./updateForm.do?seq=${seq}'" value="수정하기"></div>			
 		<div id="content" class="ck-content">
 			${content}
-		</div>			
+		</div>
 	</div>
 </body>
 </html>

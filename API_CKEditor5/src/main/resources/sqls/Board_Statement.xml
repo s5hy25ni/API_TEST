@@ -26,4 +26,9 @@
 			FROM CK_BOARD
 			WHERE SEQ=#{seq}
 	</select>
+	
+	<update id="updateBoard">
+		UPDATE HR.CK_BOARD SET CONTENT=#{content}
+			WHERE SEQ=#{seq}
+	</update>
 </mapper>

@@ -41,4 +41,10 @@ public class BoardDaoImpl implements IBoardDao {
 		logger.info("@@@@@@@@@@Repository BoardDaoImpl getDetail : {}", seq);
 		return session.selectOne("com.min.edu.model.mapper.BoardDaoImpl.getDetail", seq);
 	}
+	
+	@Override
+	public int updateBoard(BoardVo vo) {
+		logger.info("@@@@@@@@@@Repository BoardDaoImpl updateBoard : {}", vo);
+		return session.update("com.min.edu.model.mapper.BoardDaoImpl.updateBoard",vo);
+	}
 }

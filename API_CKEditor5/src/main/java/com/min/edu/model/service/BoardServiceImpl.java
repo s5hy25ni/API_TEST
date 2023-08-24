@@ -37,4 +37,10 @@ public class BoardServiceImpl implements IBoardService {
 		logger.info("@@@@@@@@@@Service BoardServiceImpl getDetail : {}", seq);
 		return dao.getDetail(seq);
 	}
+	
+	@Override
+	public int updateBoard(BoardVo vo) {
+		logger.info("@@@@@@@@@@Service BoardServiceImpl updateBoard : {}", vo);
+		return dao.updateBoard(vo);
+	}
 }
