@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	// 1. 감시 대상
+	// 1. 옵저버 감시 대상 설정
 	const target = document.getElementsByClassName("ck-content")[0]
 	
 	// 2. 옵저버 콜백 생성
@@ -32,7 +32,9 @@ $(document).ready(function(){
 
 
 function writeBoard(){
+	// 에디터 내용 가져오기
 	const data = editor.getData();
+	// hidden form 요소에 할당
 	$("#editor").text(data);
 
 	// 6. 감지 중지

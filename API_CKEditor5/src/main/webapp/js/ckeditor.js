@@ -1,3 +1,4 @@
+// Editor 생성 : $('#editor')를 숨기고 그 뒤에 editor 생성
 ClassicEditor
 	.create( document.querySelector( '#editor' ), {
 		toolbar: {
@@ -49,11 +50,13 @@ ClassicEditor
 				'tableProperties'
 			]
 		},
+		/* 글쓰기 영역 focus시 생기는 ckeditor 로고 커스텀 */
 		ui: {
 	        poweredBy: {
 	            label: ''
 	        }
 	    },
+	    /* 이미지 업로드 */
         simpleUpload: {
             uploadUrl: './uploadImage.do',
             withCredentials: true,

@@ -38,6 +38,7 @@ private static final Logger logger = LoggerFactory.getLogger(BoardController.cla
 	@RequestMapping(value = "/write.do", method = RequestMethod.POST)
 	public String write(String content, Model model) {
 		logger.info(">>>>>>>>>>>>>>>>>>>>>>> @RequestMapping.POST write : {}",content);
+		// 화면에서 가져온 html 데이터를 escappe함 : '<' -> '&lt;'
 		String escapedContent = StringEscapeUtils.escapeHtml4(content);
 		logger.info(">>>>>>>>>>>>>>>>>>>>>>> @RequestMapping.POST write escapedContent : {}",escapedContent);
 		int n = service.insertBoard(escapedContent);
@@ -58,6 +59,7 @@ private static final Logger logger = LoggerFactory.getLogger(BoardController.cla
 		logger.info(">>>>>>>>>>>>>>>>>>>>>>> @RequestMapping.GET detail : {}",seq);
 		String content = service.getDetail(seq);
 		logger.info(">>>>>>>>>>>>>>>>>>>>>>> @RequestMapping.GET detail service.getDetail : {}", content);
+		// escaped된 html을 다시 원본으로 변경
 		String unescapedContent = StringEscapeUtils.unescapeHtml4(content);
 		model.addAttribute("content",unescapedContent);
 		model.addAttribute("seq",seq);
@@ -91,7 +93,6 @@ private static final Logger logger = LoggerFactory.getLogger(BoardController.cla
 	@RequestMapping(value="/uploadImage.do", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, String> uploadImage(MultipartFile upload, HttpServletRequest req) {
-		// MultipartFile[field="upload", filename=음식사진.jpg, contentType=image/jpeg, size=3218382]
 		logger.info(">>>>>>>>>>>>>>>>>>>>>>> @RequestMapping.POST uploadImage : {}",upload);
 		
 		String ext = upload.getOriginalFilename().substring(upload.getOriginalFilename().lastIndexOf("."));
@@ -159,6 +160,7 @@ private static final Logger logger = LoggerFactory.getLogger(BoardController.cla
 		try {
 			path = WebUtils.getRealPath(req.getSession().getServletContext(),"/ckupload");
 			File oldFile = new File(path+"/"+saveName);
+			// 파일이 존재하면 삭제
 			if(oldFile.exists()) {
 				oldFile.delete();
 			}
