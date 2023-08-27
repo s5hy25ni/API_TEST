@@ -14,7 +14,18 @@
 		<h1>CKEditor5 API Sample</h1>
 		<h3>made by tadak</h3>
 		<form action="./write.do" method="post" >
-			<textarea id="editor" name="content"></textarea>
+			<div class="demo-update">
+				<textarea id="editor" name="content" placeholder="입력해주세요! textarea"></textarea>
+			    <div class="demo-update__controls">
+			        <span class="demo-update__words"></span>
+			        <svg class="demo-update__chart" viewbox="0 0 40 40" width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+			            <circle stroke="hsl(0, 0%, 93%)" stroke-width="3" fill="none" cx="20" cy="20" r="17" />
+			            <circle class="demo-update__chart__circle" stroke="hsl(202, 92%, 59%)" stroke-width="3" stroke-dasharray="134,534" stroke-linecap="round" fill="none" cx="20" cy="20" r="17" />
+			            <text class="demo-update__chart__characters" x="50%" y="50%" dominant-baseline="central" text-anchor="middle"></text>
+			        </svg>
+			        <button type="button" class="demo-update__send">Send post</button>
+			    </div>
+			</div>
 		</form>
 		<div class="btn"><input type="button" onclick="writeBoard()" value="글쓰기"></div>
 		<div class="btn"><input type="button" onclick="location.href='./boardList.do'" value="목록보기"></div>
