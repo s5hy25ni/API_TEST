@@ -4,16 +4,18 @@ $(document).ready(function(){
 	
 	// 2. 옵저버 콜백 생성
 	const callback = (mutationList, observer) => {
-		const node = mutationList[0].removedNodes[0].childNodes[0]
-	  	if(node.localName == "img"){
-		$.ajax({
-			type:"post",
-			url:"./removeImage.do",
-			data: "saveName="+node.currentSrc.substring(node.currentSrc.lastIndexOf("/")+1),
-			error: function(){
-				alert("getContent.do 잘못된 요청입니다.");
+		if(mutationList[0].removedNodes[0]){			
+			const node = mutationList[0].removedNodes[0].childNodes[0]
+		  	if(node.localName == "img"){
+				$.ajax({
+					type:"post",
+					url:"./removeImage.do",
+					data: "saveName="+node.currentSrc.substring(node.currentSrc.lastIndexOf("/")+1),
+					error: function(){
+						alert("getContent.do 잘못된 요청입니다.");
+					}
+				});
 			}
-		});
 		}
 	};
 	
